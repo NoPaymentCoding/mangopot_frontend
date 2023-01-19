@@ -9,6 +9,7 @@
  */
 
 import React, {type PropsWithChildren} from 'react';
+
 import {
   SafeAreaView,
   ScrollView,
@@ -17,6 +18,7 @@ import {
   Text,
   useColorScheme,
   View,
+  Button,
 } from 'react-native';
 
 import {
@@ -81,6 +83,7 @@ const App = () => {
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
+            <Button title="Go to posting screen" />
           </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />
