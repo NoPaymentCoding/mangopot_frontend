@@ -7,34 +7,29 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import {StackScreenProps} from '@react-navigation/stack';
 
-export default function Users() {
+//types import
+import {UserStackParamList} from '../../types/stacks/StackTypes';
+
+export type SplashScreenProps = StackScreenProps<UserStackParamList, 'Splash'>;
+
+export default function Users({navigation}: SplashScreenProps) {
   return (
     <View style={styles.container}>
-      <View style={{flex: 1}} />
-      <View style={{flex: 1, justifyContent: 'center'}}>
+      <View style={{flex: 0.8}} />
+      <View style={{flex: 2, justifyContent: 'center'}}>
         <View style={styles.logoArea}>
           <Image
-            source={require('../../assets/images/mangopot_logo.png')}
-            style={{flex: 1, resizeMode: 'contain'}}
+            source={require('../../assets/images/mangopot_splash_orange.png')}
+            style={{flex: 0.6, resizeMode: 'contain'}}
           />
         </View>
       </View>
       <View style={{flex: 1, padding: 15}}>
+        <View style={styles.btnArea} />
         <View style={styles.btnArea}>
-          <TouchableOpacity>
-            <Image
-              source={require('../../assets/images/kakao_login_large_wide.png')}
-              style={{
-                resizeMode: 'contain',
-                flex: 1,
-                maxWidth: '100%',
-              }}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.btnArea}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUpInfo')}>
             <Image
               source={require('../../assets/images/kakao_login_large_wide.png')}
               style={{
@@ -55,10 +50,10 @@ export default function Users() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F27649',
+    // backgroundColor: '#fc913a',
   },
   logoArea: {
-    flex: 0.5,
+    flex: 0.65,
     justifyContent: 'center',
     alignItems: 'center',
     // backgroundColor: 'pink',
