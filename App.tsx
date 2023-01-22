@@ -14,7 +14,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 //screen import
 import SplashScreen from './src/screens/users/index';
-import SignUpScreen from './src/screens/users/SignUp';
+import NicknameScreen from './src/screens/users/NicknameScreen';
+import InterestsScreen from './src/screens/users/InterestsScreen';
+import PositionsScreen from './src/screens/users/PositionsScreen';
+import ProfileScreen from './src/screens/users/ProfileScreen';
 
 //types import
 import {UserStackParamList} from './src/types/stacks/StackTypes';
@@ -34,7 +37,14 @@ const App = () => {
           component={SplashScreen}
           options={{headerShown: false}}
         />
-        <UserStack.Screen name="SignUpInfo" component={SignUpScreen} />
+        <UserStack.Screen
+          name="Nickname"
+          component={NicknameScreen}
+          options={{headerShown: false}}
+        />
+        <UserStack.Screen name="Interests" component={InterestsScreen} />
+        <UserStack.Screen name="Positions" component={PositionsScreen} />
+        <UserStack.Screen name="Profile" component={ProfileScreen} />
       </UserStack.Navigator>
     </NavigationContainer>
   );
