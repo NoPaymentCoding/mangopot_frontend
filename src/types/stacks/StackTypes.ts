@@ -1,8 +1,10 @@
 export type UserStackParamList = {
   Splash: undefined;
-  SignUpInfo: {
-    nickname: string;
-    interests: string[];
-    positions: string[];
+  Nickname: string;
+  Interests: number[];
+  Positions: number[];
+  Profile: {
+    profileImg: string;
+    profileInfo: string;
   };
 };
