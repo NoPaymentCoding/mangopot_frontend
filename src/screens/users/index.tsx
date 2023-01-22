@@ -29,7 +29,7 @@ export default function Users({navigation}: SplashScreenProps) {
       <View style={{flex: 1, padding: 15}}>
         <View style={styles.btnArea} />
         <View style={styles.btnArea}>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUpInfo')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Nickname')}>
             <Image
               source={require('../../assets/images/kakao_login_large_wide.png')}
               style={{

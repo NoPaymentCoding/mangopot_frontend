@@ -9,18 +9,21 @@ import {
 
 import {StackScreenProps} from '@react-navigation/stack';
 
+import Header from '../../components/Header';
+
 //types import
 import {UserStackParamList} from '../../types/stacks/StackTypes';
+import interests from '../../types/users/SignUpTypes';
 
-export type SignUpScreenProps = StackScreenProps<
+export type NicknameScreenProps = StackScreenProps<
   UserStackParamList,
-  'SignUpInfo'
+  'Nickname'
 >;
 
-export default function SignUp() {
+export default function NicknameScreen({navigation}: NicknameScreenProps) {
   return (
     <View style={styles.container}>
-      <View style={{flex: 0.38, justifyContent: 'center'}}>
+      <View style={{flex: 0.5, justifyContent: 'center'}}>
         <View style={styles.titleTxtArea}>
           <Text style={styles.titleTxt}>{'회원가입'}</Text>
         </View>
@@ -58,7 +61,9 @@ export default function SignUp() {
       <View style={{flex: 1, padding: 15}}>
         <View style={styles.btnArea} />
         <View style={styles.btnArea}>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => navigation.navigate('Interests')}>
             <Text style={styles.btnTxt}>{'다음으로'}</Text>
           </TouchableOpacity>
         </View>
