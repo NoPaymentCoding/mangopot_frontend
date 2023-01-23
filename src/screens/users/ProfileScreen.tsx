@@ -2,16 +2,24 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
+  customStylesheet,
   TouchableOpacity,
   TextInput,
+  StyleSheet,
+  Dimensions,
+  Image,
 } from 'react-native';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
+
+import styles from './style';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+Icon.loadFont().then();
 
 import {StackScreenProps} from '@react-navigation/stack';
 
 //types import
 import {UserStackParamList} from '../../types/stacks/StackTypes';
-import interests from '../../types/users/SignUpTypes';
 
 export type ProfileScreenProps = StackScreenProps<
   UserStackParamList,
@@ -21,48 +29,44 @@ export type ProfileScreenProps = StackScreenProps<
 export default function ProfileScreen({navigation}: ProfileScreenProps) {
   return (
     <View style={styles.container}>
-      <View style={{flex: 0.5, justifyContent: 'center'}}>
+      <View style={styles.topArea}>
         <View style={styles.titleTxtArea}>
           <Text style={styles.titleTxt}>{'프로필을 꾸며보세요'}</Text>
         </View>
       </View>
-      <View style={{flex: 2}}>
-        <View style={{flex: 0.2}} />
-        <View style={{flex: 1}}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'flex-end',
-            }}>
-            <View style={styles.mainTxtArea}>
-              <Text style={styles.mainTxt}>{'닉네임'}</Text>
-            </View>
-          </View>
-          <View style={{flex: 1.2, margin: 10}}>
-            <View style={{flex: 1}}>
-              <TextInput
-                style={styles.textBoxArea}
-                placeholder={'10자 이하의 닉네임을 입력해주세요.'}
-              />
-            </View>
-          </View>
-          <View style={{flex: 0.5}}>
-            <View style={{flex: 1, marginLeft: 20}}>
-              <Text style={styles.validationTxt}>
-                {'사용가능한 닉네임입니다'}
-              </Text>
-            </View>
+      <View style={styles.midArea}>
+        <View style={customStyles.customMidArea}>
+          <View style={customStyles.profileImgArea}>
+            <Image
+              style={customStyles.profileImg}
+              source={require('../../assets/images/ggamja.jpeg')}
+            />
+            <TouchableOpacity style={customStyles.editImg}>
+              <Icon name="ios-image-outline" size={25} />
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={{flex: 1}} />
+        <View style={customStyles.profileInfoArea}>
+          <View style={customStyles.mainTxtArea}>
+            <Text style={customStyles.mainTxt}>{'자기소개'}</Text>
+          </View>
+          <View>
+            <TextInput
+              style={customStyles.textBoxArea}
+              editable
+              multiline
+              numberOfLines={4}
+              placeholder={'자유롭게 자신을 소개해보세요!'}
+            />
+          </View>
+        </View>
       </View>
-      <View style={{flex: 1, padding: 15}}>
-        <View style={styles.btnArea} />
+      <View style={styles.btmArea}>
         <View style={styles.btnArea}>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => navigation.navigate('Positions')}>
-            <Text style={styles.btnTxt}>{'다음으로'}</Text>
+            <Text style={styles.btnTxt}>{'시작하기'}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.btnArea} />
@@ -71,64 +75,64 @@ export default function ProfileScreen({navigation}: ProfileScreenProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  titleTxtArea: {
-    //설명글
-    padding: 20,
-    backgroundColor: 'white',
-  },
-  titleTxt: {
-    fontSize: 25,
-    fontWeight: 'bold',
+const customStyles = StyleSheet.create({
+  customMidArea: {
+    flex: 0.7,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: 'green',
+    // padding: 20,
   },
   mainTxtArea: {
     //설명글
-    paddingTop: 20,
-    paddingLeft: 20,
+    paddingTop: 10,
     paddingBottom: 10,
-
-    // backgroundColor: 'white',
   },
   mainTxt: {
     fontSize: 20,
     fontWeight: 'bold',
   },
   textBoxArea: {
-    flex: 1,
+    // flex: 1, 있으면..뒤에묻힘(?) 화면에안나옴
     width: '100%',
+    height: '90%',
     borderRadius: 8,
-    backgroundColor: '#F0F0F0',
-    fontSize: 20,
-    fontWeight: 'bold',
-    padding: 20,
+    backgroundColor: '#f0f0f0',
+    fontSize: 18,
+    fontWeight: 'normal',
+    padding: 15,
+    paddingTop: 20,
   },
-  btnArea: {
+  //image 커스텀
+  profileImgArea: {
+    // flex: 0.7,
     justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor: 'orange',
+    width: wp('40%'), //width == height 한 후 radius : width/2 : image circular
+    height: wp('40%'),
+    marginBottom: 10,
+  },
+  profileImg: {
+    flex: 1,
+    width: wp('40%'), //width == height 한 후 radius : width/2 : image circular
+    height: wp('40%'),
+    borderRadius: wp('40%') / 2,
+  },
+  profileInfoArea: {
     flex: 1,
     // backgroundColor: 'blue',
-    marginBottom: 10,
     marginTop: 10,
   },
-  validationTxt: {
-    fontSize: 15,
-    paddingTop: 10,
-  },
-  btn: {
-    flex: 1,
-    width: '95%',
-    borderRadius: 8,
+  editImg: {
+    position: 'absolute', //요소와 겹침 가능 (관계없이)
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fc913a',
-    // alignItems: 'center',
-  },
-  btnTxt: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    width: wp('8%'), //width == height 한 후 radius : width/2 : image circular
+    height: wp('8%'),
+    borderRadius: wp('8%') / 2,
+    backgroundColor: '#f0f0f0',
+    right: 10,
+    bottom: 10,
   },
 });
