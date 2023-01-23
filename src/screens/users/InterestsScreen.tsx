@@ -1,11 +1,13 @@
 //react libraries import
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   ScrollView,
   StyleSheet,
+  Button,
+  Pressable,
 } from 'react-native';
 
 //design 관련
@@ -17,22 +19,56 @@ import interests from '../../types/users/SignUpTypes';
 
 //stack 관련 import
 import {StackScreenProps} from '@react-navigation/stack';
+import userService from '../../services/userService';
 
 export type InterestsScreenProps = StackScreenProps<
   UserStackParamList,
   'Interests'
 >;
 
-/*
-flat list로 그리드 그리는법 찾아볼 것..
- */
-const Item = ({title}) => (
-  <View style={customStyles.selectBtnArea}>
-    <Text style={customStyles.selectTxt}>{title}</Text>
-  </View>
-);
+const InterestButton = ({name}: string) => {
+  const [isSelected, setIsSlected] = useState<boolean>(false);
+
+  return (
+    <View>
+      <Pressable
+        style={[
+          customStyles.selectBtnArea,
+          {backgroundColor: isSelected ? '#fc913a' : '#f0f0f0'},
+        ]}
+        onPress={() => {
+          setIsSlected(!isSelected);
+        }}>
+        <Text
+          style={[
+            customStyles.selectTxt,
+            {color: isSelected ? 'white' : 'black'},
+          ]}>
+          {name}
+        </Text>
+      </Pressable>
+    </View>
+  );
+};
 
 export default function InterestsScreen({navigation}: InterestsScreenProps) {
+  // const [interestsInfo, setInterestsInfo] = useState<interests[]>([]);
+
+  // const getInterestList = async () => {
+  //   try {
+  //     const result = await userService.getInterestList();
+  //     setInterestsInfo(result);
+  //   } catch (err) {
+  //     console.log('err');
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   userService.getInterestList().then(res => {
+  //     setInterestsInfo(res.data);
+  //   });
+  // }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.topArea}>
@@ -49,10 +85,8 @@ export default function InterestsScreen({navigation}: InterestsScreenProps) {
             // backgroundColor: 'blue',
           }}>
           <View style={customStyles.scrollView}>
-            {interestsInfo.map(item => (
-              <View style={customStyles.selectBtnArea}>
-                <Text style={customStyles.selectTxt}>{item.name}</Text>
-              </View>
+            {interestsInfo.map((info, idx) => (
+              <InterestButton name={info.name} key={idx} />
             ))}
           </View>
         </ScrollView>
