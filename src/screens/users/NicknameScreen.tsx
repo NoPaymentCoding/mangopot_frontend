@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+//react libraries import
+import React from 'react';
 import {
   View,
   Text,
@@ -7,15 +8,14 @@ import {
   TextInput,
 } from 'react-native';
 
+//design 관련
 import styles from './style';
-
-import {StackScreenProps} from '@react-navigation/stack';
-
-import Header from '../../components/Header';
 
 //types import
 import {UserStackParamList} from '../../types/stacks/StackTypes';
-import interests from '../../types/users/SignUpTypes';
+
+//stack 관련 import
+import {StackScreenProps} from '@react-navigation/stack';
 
 export type NicknameScreenProps = StackScreenProps<
   UserStackParamList,

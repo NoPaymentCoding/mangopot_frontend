@@ -1,18 +1,15 @@
+//react libraries import
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-import {StackScreenProps} from '@react-navigation/stack';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
+//design 관련
 import styles from './style';
 
 //types import
 import {UserStackParamList} from '../../types/stacks/StackTypes';
+
+//stack 관련 import
+import {StackScreenProps} from '@react-navigation/stack';
 
 export type SplashScreenProps = StackScreenProps<UserStackParamList, 'Splash'>;
 

@@ -1,25 +1,22 @@
-import React, {Component} from 'react';
+//react libraries import
+import React from 'react';
 import {
   View,
   Text,
-  customStylesheet,
   TouchableOpacity,
-  TextInput,
-  TouchableHighlight,
   ScrollView,
-  SafeAreaView,
-  FlatList,
-  Image,
   StyleSheet,
 } from 'react-native';
 
-import {StackScreenProps} from '@react-navigation/stack';
+//design 관련
+import styles from './style';
 
 //types import
 import {UserStackParamList} from '../../types/stacks/StackTypes';
 import interests from '../../types/users/SignUpTypes';
 
-import styles from './style';
+//stack 관련 import
+import {StackScreenProps} from '@react-navigation/stack';
 
 export type InterestsScreenProps = StackScreenProps<
   UserStackParamList,

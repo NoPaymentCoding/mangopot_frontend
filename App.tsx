@@ -1,13 +1,4 @@
-﻿/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
+﻿//react library import
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -22,8 +13,7 @@ import ProfileScreen from './src/screens/users/ProfileScreen';
 //types import
 import {UserStackParamList} from './src/types/stacks/StackTypes';
 
-// const Stack = createNativeStackNavigator();
-
+//stacks
 const UserStack = createNativeStackNavigator<UserStackParamList>();
 
 const App = () => {
@@ -49,24 +39,5 @@ const App = () => {
     </NavigationContainer>
   );
 };
-
-// const styles = StyleSheet.create({
-//   sectionContainer: {
-//     marginTop: 32,
-//     paddingHorizontal: 24,
-//   },
-//   sectionTitle: {
-//     fontSize: 24,
-//     fontWeight: '600',
-//   },
-//   sectionDescription: {
-//     marginTop: 8,
-//     fontSize: 18,
-//     fontWeight: '400',
-//   },
-//   highlight: {
-//     fontWeight: '700',
-//   },
-// });
 
 export default App;

@@ -1,25 +1,26 @@
-import React, {Component} from 'react';
+//react libraries import
+import React from 'react';
 import {
   View,
   Text,
-  customStylesheet,
   TouchableOpacity,
   TextInput,
   StyleSheet,
-  Dimensions,
   Image,
 } from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
+//design 관련
 import styles from './style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 Icon.loadFont().then();
 
-import {StackScreenProps} from '@react-navigation/stack';
-
 //types import
 import {UserStackParamList} from '../../types/stacks/StackTypes';
+
+//stack 관련 import
+import {StackScreenProps} from '@react-navigation/stack';
 
 export type ProfileScreenProps = StackScreenProps<
   UserStackParamList,
