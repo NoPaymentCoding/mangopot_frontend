@@ -33,6 +33,9 @@ export default function NicknameScreen({navigation}: NicknameScreenProps) {
   //유효성 검사
   const [isValidate, setIsValidate] = useState<boolean>(false);
 
+  //존재하는 닉네임인지 검사
+
+  //닉네임을 입력할 때 마다 유효성 검사
   useEffect(() => {
     if (nickname.length > 10) {
       setIsValidate(false);
