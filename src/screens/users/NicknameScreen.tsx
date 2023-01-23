@@ -7,6 +7,8 @@ import {
   TextInput,
 } from 'react-native';
 
+import styles from './style';
+
 import {StackScreenProps} from '@react-navigation/stack';
 
 import Header from '../../components/Header';
@@ -23,43 +25,31 @@ export type NicknameScreenProps = StackScreenProps<
 export default function NicknameScreen({navigation}: NicknameScreenProps) {
   return (
     <View style={styles.container}>
-      <View style={{flex: 0.5, justifyContent: 'center'}}>
+      <View style={styles.topArea}>
         <View style={styles.titleTxtArea}>
           <Text style={styles.titleTxt}>{'회원가입'}</Text>
         </View>
       </View>
-      <View style={{flex: 2}}>
-        <View style={{flex: 0.2}} />
-        <View style={{flex: 1}}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'flex-end',
-            }}>
-            <View style={styles.mainTxtArea}>
-              <Text style={styles.mainTxt}>{'닉네임'}</Text>
-            </View>
+      <View style={styles.midArea}>
+        {/*<View style={{flex: 0.2}} />*/}
+        <View>
+          <View style={customStyles.mainTxtArea}>
+            <Text style={customStyles.mainTxt}>{'닉네임'}</Text>
           </View>
-          <View style={{flex: 1.2, margin: 10}}>
-            <View style={{flex: 1}}>
-              <TextInput
-                style={styles.textBoxArea}
-                placeholder={'10자 이하의 닉네임을 입력해주세요.'}
-              />
-            </View>
+          <View>
+            <TextInput
+              style={customStyles.textBoxArea}
+              placeholder={'10자 이하의 닉네임을 입력해주세요.'}
+            />
           </View>
-          <View style={{flex: 0.5}}>
-            <View style={{flex: 1, marginLeft: 20}}>
-              <Text style={styles.validationTxt}>
-                {'사용가능한 닉네임입니다'}
-              </Text>
-            </View>
+          <View style={customStyles.validationTxtArea}>
+            <Text style={customStyles.validationTxt}>
+              {'사용가능한 닉네임입니다'}
+            </Text>
           </View>
         </View>
-        <View style={{flex: 1}} />
       </View>
-      <View style={{flex: 1, padding: 15}}>
-        <View style={styles.btnArea} />
+      <View style={styles.btmArea}>
         <View style={styles.btnArea}>
           <TouchableOpacity
             style={styles.btn}
@@ -73,64 +63,31 @@ export default function NicknameScreen({navigation}: NicknameScreenProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  titleTxtArea: {
-    //설명글
-    padding: 20,
-    backgroundColor: 'white',
-  },
-  titleTxt: {
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
+const customStyles = StyleSheet.create({
   mainTxtArea: {
     //설명글
-    paddingTop: 20,
-    paddingLeft: 20,
+    paddingTop: 10,
     paddingBottom: 10,
-
-    // backgroundColor: 'white',
   },
   mainTxt: {
     fontSize: 20,
     fontWeight: 'bold',
   },
-  textBoxArea: {
-    flex: 1,
-    width: '100%',
-    borderRadius: 8,
-    backgroundColor: '#F0F0F0',
-    fontSize: 20,
-    fontWeight: 'bold',
-    padding: 20,
-  },
-  btnArea: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    // backgroundColor: 'blue',
-    marginBottom: 10,
-    marginTop: 10,
+  validationTxtArea: {
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   validationTxt: {
     fontSize: 15,
-    paddingTop: 10,
+    // paddingTop: 10,
   },
-  btn: {
-    flex: 1,
-    width: '95%',
+  textBoxArea: {
+    // flex: 1, 있으면..뒤에묻힘(?) 화면에안나옴
+    width: '100%',
     borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fc913a',
-    // alignItems: 'center',
-  },
-  btnTxt: {
+    backgroundColor: '#f0f0f0',
     fontSize: 20,
     fontWeight: 'bold',
+    padding: 20,
   },
 });

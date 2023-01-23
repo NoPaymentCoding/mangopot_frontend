@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 
+import styles from './style';
+
 //types import
 import {UserStackParamList} from '../../types/stacks/StackTypes';
 
@@ -17,17 +19,17 @@ export type SplashScreenProps = StackScreenProps<UserStackParamList, 'Splash'>;
 export default function Users({navigation}: SplashScreenProps) {
   return (
     <View style={styles.container}>
-      <View style={{flex: 0.8}} />
-      <View style={{flex: 2, justifyContent: 'center'}}>
-        <View style={styles.logoArea}>
+      <View style={styles.topArea} />
+      <View style={customStyles.midArea}>
+        <View style={customStyles.logoArea}>
           <Image
             source={require('../../assets/images/mangopot_splash_orange.png')}
             style={{flex: 0.6, resizeMode: 'contain'}}
           />
         </View>
       </View>
-      <View style={{flex: 1, padding: 15}}>
-        <View style={styles.btnArea} />
+      <View style={styles.btmArea}>
+        {/*<View style={styles.btnArea} />*/}
         <View style={styles.btnArea}>
           <TouchableOpacity onPress={() => navigation.navigate('Nickname')}>
             <Image
@@ -47,23 +49,17 @@ export default function Users({navigation}: SplashScreenProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: '#fc913a',
-  },
+const customStyles = StyleSheet.create({
   logoArea: {
-    flex: 0.65,
+    flex: 0.7,
     justifyContent: 'center',
     alignItems: 'center',
     // backgroundColor: 'pink',
   },
-  btnArea: {
+  midArea: {
+    flex: 3,
     justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    // backgroundColor: 'blue',
-    marginBottom: 10,
-    marginTop: 10,
+    // backgroundColor: 'green',
+    padding: 20,
   },
 });

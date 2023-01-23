@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
+  customStylesheet,
   TouchableOpacity,
   TextInput,
   TouchableHighlight,
@@ -10,6 +10,7 @@ import {
   SafeAreaView,
   FlatList,
   Image,
+  StyleSheet,
 } from 'react-native';
 
 import {StackScreenProps} from '@react-navigation/stack';
@@ -17,7 +18,8 @@ import {StackScreenProps} from '@react-navigation/stack';
 //types import
 import {UserStackParamList} from '../../types/stacks/StackTypes';
 import interests from '../../types/users/SignUpTypes';
-import window from '@react-navigation/native/lib/typescript/src/__mocks__/window';
+
+import styles from './style';
 
 export type InterestsScreenProps = StackScreenProps<
   UserStackParamList,
@@ -28,36 +30,37 @@ export type InterestsScreenProps = StackScreenProps<
 flat list로 그리드 그리는법 찾아볼 것..
  */
 const Item = ({title}) => (
-  <View style={styles.selectBtnArea}>
-    <Text style={styles.selectTxt}>{title}</Text>
+  <View style={customStyles.selectBtnArea}>
+    <Text style={customStyles.selectTxt}>{title}</Text>
   </View>
 );
 
 export default function InterestsScreen({navigation}: InterestsScreenProps) {
   return (
     <View style={styles.container}>
-      <View style={{flex: 0.5, justifyContent: 'center'}}>
+      <View style={styles.topArea}>
         <View style={styles.titleTxtArea}>
           <Text style={styles.titleTxt}>
             {'관심있는 분야 태그를\n선택하세요'}
           </Text>
         </View>
       </View>
-      <ScrollView
-        style={{
-          flex: 2,
-          backgroundColor: 'blue',
-        }}>
-        <View style={styles.scrollView}>
-          {interestsInfo.map(item => (
-            <View style={styles.selectBtnArea}>
-              <Text style={styles.selectTxt}>{item.name}</Text>
-            </View>
-          ))}
-        </View>
-      </ScrollView>
-      <View style={{flex: 1, padding: 15}}>
-        <View style={styles.btnArea} />
+      <View style={styles.midArea}>
+        <ScrollView
+          style={{
+            flex: 2,
+            // backgroundColor: 'blue',
+          }}>
+          <View style={customStyles.scrollView}>
+            {interestsInfo.map(item => (
+              <View style={customStyles.selectBtnArea}>
+                <Text style={customStyles.selectTxt}>{item.name}</Text>
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
+      <View style={styles.btmArea}>
         <View style={styles.btnArea}>
           <TouchableOpacity
             style={styles.btn}
@@ -71,20 +74,7 @@ export default function InterestsScreen({navigation}: InterestsScreenProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  titleTxtArea: {
-    //설명글
-    padding: 20,
-    backgroundColor: 'white',
-  },
-  titleTxt: {
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
+const customStyles = StyleSheet.create({
   scrollView: {
     flexDirection: 'row', //가로배치
     flexWrap: 'wrap', //컨테이너 끝에 닿으면 줄바꿈
@@ -92,7 +82,7 @@ const styles = StyleSheet.create({
   selectBtnArea: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F0F0F0',
+    backgroundColor: '#f0f0f0',
     padding: 10,
     borderRadius: 8,
     margin: 7,
@@ -101,31 +91,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     color: 'black',
-  },
-  btnArea: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    // backgroundColor: 'blue',
-    marginBottom: 10,
-    marginTop: 10,
-  },
-  validationTxt: {
-    fontSize: 15,
-    paddingTop: 10,
-  },
-  btn: {
-    flex: 1,
-    width: '95%',
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fc913a',
-    // alignItems: 'center',
-  },
-  btnTxt: {
-    fontSize: 20,
-    fontWeight: 'bold',
   },
 });
 
