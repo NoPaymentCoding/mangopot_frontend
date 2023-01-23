@@ -1,5 +1,5 @@
 //react libraries import
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   FlatList,
   Image,
   StyleSheet,
+  Pressable,
 } from 'react-native';
 
 //design 관련
@@ -20,30 +21,51 @@ import positions from '../../types/users/SignUpTypes';
 
 //stack 관련 import
 import {StackScreenProps} from '@react-navigation/stack';
+import interests from '../../types/users/SignUpTypes';
+import userService from '../../services/userService';
 
 export type PositionsScreenProps = StackScreenProps<
   UserStackParamList,
   'Positions'
 >;
 
-const Item = ({title}) => (
-  <View style={customStyles.selectBoxArea}>
-    <View style={{flex: 8}}>
-      <Text style={customStyles.selectTxt}>{title}</Text>
-    </View>
-    <View style={{flex: 1, justifyContent: 'center'}}>
-      <Image source={require('../../assets/images/check.png')} />
-    </View>
-  </View>
-);
+const Item = ({name}: string) => {
+  const [isSelected, setIsSelected] = useState<boolean>(false);
+  return (
+    <Pressable
+      style={customStyles.selectBoxArea}
+      onPress={() => {
+        setIsSelected(!isSelected);
+      }}>
+      <View style={{flex: 8}}>
+        <Text style={customStyles.selectTxt}>{name}</Text>
+      </View>
+      {isSelected ? (
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          <Image source={require('../../assets/images/check.png')} />
+        </View>
+      ) : (
+        <View />
+      )}
+    </Pressable>
+  );
+};
 
 export default function PositionsScreen({navigation}: PositionsScreenProps) {
+  // const [positionsInfo, setPositionsInfo] = useState<positions[]>([]);
+  //
+  // useEffect(() => {
+  //   userService.getPositionList().then(res => {
+  //     setPositionsInfo(res.data);
+  //   });
+  // }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.topArea}>
         <View style={styles.titleTxtArea}>
           <Text style={styles.titleTxt}>
-            {'관심있는 포지션을\n 선택해주세요'}
+            {'관심있는 포지션을\n선택해주세요'}
           </Text>
         </View>
       </View>
@@ -52,7 +74,7 @@ export default function PositionsScreen({navigation}: PositionsScreenProps) {
           <ScrollView>
             <FlatList
               data={positionsInfo}
-              renderItem={({item}) => <Item title={item.name} />}
+              renderItem={({item}) => <Item name={item.name} />}
             />
           </ScrollView>
         </SafeAreaView>
