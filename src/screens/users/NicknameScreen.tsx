@@ -1,5 +1,5 @@
 //react libraries import
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -16,6 +16,7 @@ import {UserStackParamList} from '../../types/stacks/StackTypes';
 
 //stack 관련 import
 import {StackScreenProps} from '@react-navigation/stack';
+import userService from '../../services/userService';
 
 export type NicknameScreenProps = StackScreenProps<
   UserStackParamList,
@@ -23,6 +24,27 @@ export type NicknameScreenProps = StackScreenProps<
 >;
 
 export default function NicknameScreen({navigation}: NicknameScreenProps) {
+  //입력받을 닉네임
+  const [nickname, setNickname] = useState<String>('');
+
+  //오류메세지
+  const [validationMsg, setValidationMsg] = useState<String>('');
+
+  //유효성 검사
+  const [isValidate, setIsValidate] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (nickname.length > 10) {
+      setIsValidate(false);
+      setValidationMsg('글자수는 10자를 초과할 수 없습니다.');
+    } else if (nickname.length < 3) {
+      setIsValidate(false);
+      setValidationMsg('글자수는 2자 미만일 수 없습니다.');
+    } else {
+      setIsValidate(true);
+    }
+  }, [nickname]);
+
   return (
     <View style={styles.container}>
       <View style={styles.topArea}>
@@ -40,12 +62,17 @@ export default function NicknameScreen({navigation}: NicknameScreenProps) {
             <TextInput
               style={customStyles.textBoxArea}
               placeholder={'10자 이하의 닉네임을 입력해주세요.'}
+              onChangeText={nickname => setNickname(nickname)}
             />
           </View>
           <View style={customStyles.validationTxtArea}>
-            <Text style={customStyles.validationTxt}>
-              {'사용가능한 닉네임입니다'}
-            </Text>
+            {isValidate ? (
+              <Text style={customStyles.validateTxt}>
+                {'사용가능한 닉네임입니다.'}
+              </Text>
+            ) : (
+              <Text style={customStyles.notValidateTxt}>{validationMsg}</Text>
+            )}
           </View>
         </View>
       </View>
@@ -77,8 +104,13 @@ const customStyles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
   },
-  validationTxt: {
+  notValidateTxt: {
     fontSize: 15,
+    color: 'red',
+  },
+  validateTxt: {
+    fontSize: 15,
+    color: 'gray',
     // paddingTop: 10,
   },
   textBoxArea: {
