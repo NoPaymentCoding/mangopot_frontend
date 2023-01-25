@@ -1,9 +1,12 @@
 export default interface interests {
-  id: number;
-  name: string;
+    inId: number;
+    name: string;
+    posId: number;
+    logoImg: string;
 }
 
 export default interface positions {
-  id: number;
-  name: string;
+    id: number;
+    name: string;
+    logoImg: string;
 }
