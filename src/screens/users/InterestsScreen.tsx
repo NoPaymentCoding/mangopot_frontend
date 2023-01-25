@@ -20,7 +20,7 @@ export type InterestsScreenProps = StackScreenProps<UserStackParamList,
 type Props = {
     name: string;
     id: number;
-    appendInterestsList: (x: number) => void;
+    appendInterestsList: (x: number, check: boolean) => void;
 }
 
 const InterestButton = ({name, id, appendInterestsList}: Props) => {
@@ -35,7 +35,7 @@ const InterestButton = ({name, id, appendInterestsList}: Props) => {
                 ]}
                 onPress={() => {
                     setIsSlected(!isSelected);
-                    appendInterestsList(id);
+                    appendInterestsList(id, isSelected);
                 }}>
                 <Text
                     style={[
@@ -51,14 +51,20 @@ const InterestButton = ({name, id, appendInterestsList}: Props) => {
 
 export default function InterestsScreen({navigation}: InterestsScreenProps) {
     const [interestsInfo, setInterestsInfo] = useState<interests[]>([]);
-
     let selectedInterests: number[] = [];
 
-    const appendInterestsList = (x: number) => {
-        selectedInterests.push(x);
-        // selectedInterests.forEach(function (number) {
-        //     console.log(number);
-        // });
+    const appendInterestsList = (x: number, check: boolean) => {
+        if (!check) {
+            selectedInterests.push(x);
+        } else {
+            selectedInterests = selectedInterests.filter((el: number) => el !== x); //있으면 삭제
+        }
+
+        console.log("======================");
+        selectedInterests.forEach(function (number) {
+            console.log(number);
+        });
+
     }
 
     //선택할 수 있는 interest tag list를 가져옴
