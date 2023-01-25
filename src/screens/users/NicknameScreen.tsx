@@ -1,11 +1,11 @@
 //react libraries import
 import React, {useCallback, useEffect, useState} from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
+    View,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+    TextInput,
 } from 'react-native';
 
 //design 관련
