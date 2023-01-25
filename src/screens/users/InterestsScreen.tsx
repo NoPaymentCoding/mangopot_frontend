@@ -125,77 +125,77 @@ const customStyles = StyleSheet.create({
   },
 });
 
-const interestsInfo: interests[] = [
-  {
-    id: 0,
-    name: 'spring',
-  },
-  {
-    id: 1,
-    name: 'react',
-  },
-  {
-    id: 2,
-    name: 'mySQL',
-  },
-  {
-    id: 3,
-    name: 'reactNative',
-  },
-  {
-    id: 4,
-    name: 'docker',
-  },
-  {
-    id: 5,
-    name: 'Kotlin',
-  },
-  {
-    id: 6,
-    name: 'node.js',
-  },
-  {
-    id: 7,
-    name: 'vue.js',
-  },
-  {
-    id: 8,
-    name: 'Angular',
-  },
-  {
-    id: 9,
-    name: 'flask',
-  },
-  {
-    id: 10,
-    name: 'Django',
-  },
-  {
-    id: 11,
-    name: 'mongoDB',
-  },
-  {
-    id: 12,
-    name: 'postgreSQL',
-  },
-  {
-    id: 13,
-    name: 'swift',
-  },
-  {
-    id: 14,
-    name: 'java',
-  },
-  {
-    id: 15,
-    name: 'javascript',
-  },
-  {
-    id: 16,
-    name: 'typescript',
-  },
-  {
-    id: 17,
-    name: 'ruby',
-  },
-];
+// const interestsInfo: interests[] = [
+//   {
+//     id: 0,
+//     name: 'spring',
+//   },
+//   {
+//     id: 1,
+//     name: 'react',
+//   },
+//   {
+//     id: 2,
+//     name: 'mySQL',
+//   },
+//   {
+//     id: 3,
+//     name: 'reactNative',
+//   },
+//   {
+//     id: 4,
+//     name: 'docker',
+//   },
+//   {
+//     id: 5,
+//     name: 'Kotlin',
+//   },
+//   {
+//     id: 6,
+//     name: 'node.js',
+//   },
+//   {
+//     id: 7,
+//     name: 'vue.js',
+//   },
+//   {
+//     id: 8,
+//     name: 'Angular',
+//   },
+//   {
+//     id: 9,
+//     name: 'flask',
+//   },
+//   {
+//     id: 10,
+//     name: 'Django',
+//   },
+//   {
+//     id: 11,
+//     name: 'mongoDB',
+//   },
+//   {
+//     id: 12,
+//     name: 'postgreSQL',
+//   },
+//   {
+//     id: 13,
+//     name: 'swift',
+//   },
+//   {
+//     id: 14,
+//     name: 'java',
+//   },
+//   {
+//     id: 15,
+//     name: 'javascript',
+//   },
+//   {
+//     id: 16,
+//     name: 'typescript',
+//   },
+//   {
+//     id: 17,
+//     name: 'ruby',
+//   },
+// ];
