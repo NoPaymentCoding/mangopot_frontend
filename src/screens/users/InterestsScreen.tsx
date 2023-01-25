@@ -1,14 +1,6 @@
 //react libraries import
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-  Button,
-  Pressable,
-} from 'react-native';
+import {Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
 
 //design 관련
 import styles from './style';
@@ -21,114 +13,120 @@ import interests from '../../types/users/SignUpTypes';
 import {StackScreenProps} from '@react-navigation/stack';
 import userService from '../../services/userService';
 
-export type InterestsScreenProps = StackScreenProps<
-  UserStackParamList,
-  'Interests'
->;
+export type InterestsScreenProps = StackScreenProps<UserStackParamList,
+    'Interests'>;
 
-const InterestButton = ({name}: string) => {
-  const [isSelected, setIsSlected] = useState<boolean>(false);
 
-  return (
-    <View>
-      <Pressable
-        style={[
-          customStyles.selectBtnArea,
-          {backgroundColor: isSelected ? '#fc913a' : '#f0f0f0'},
-        ]}
-        onPress={() => {
-          setIsSlected(!isSelected);
-        }}>
-        <Text
-          style={[
-            customStyles.selectTxt,
-            {color: isSelected ? 'white' : 'black'},
-          ]}>
-          {name}
-        </Text>
-      </Pressable>
-    </View>
-  );
+type Props = {
+    name: string;
+    id: number;
+    appendInterestsList: (x: number) => void;
+}
+
+const InterestButton = ({name, id, appendInterestsList}: Props) => {
+    const [isSelected, setIsSlected] = useState<boolean>(false);
+
+    return (
+        <View>
+            <Pressable
+                style={[
+                    customStyles.selectBtnArea,
+                    {backgroundColor: isSelected ? '#fc913a' : '#f0f0f0'},
+                ]}
+                onPress={() => {
+                    setIsSlected(!isSelected);
+                    appendInterestsList(id);
+                }}>
+                <Text
+                    style={[
+                        customStyles.selectTxt,
+                        {color: isSelected ? 'white' : 'black'},
+                    ]}>
+                    {name}
+                </Text>
+            </Pressable>
+        </View>
+    );
 };
 
 export default function InterestsScreen({navigation}: InterestsScreenProps) {
-  const [interestsInfo, setInterestsInfo] = useState<interests[]>([]);
-  // const [selectedInterests, setSelectedInterests] = useState<number[]>();
+    const [interestsInfo, setInterestsInfo] = useState<interests[]>([]);
 
-  // const getInterestList = async () => {
-  //   try {
-  //     const result = await userService.getInterestList();
-  //     setInterestsInfo(result);
-  //   } catch (err) {
-  //     console.log('err');
-  //   }
-  // };
+    let selectedInterests: number[] = [];
 
-  useEffect(() => {
-    userService
-      .getInterestList()
-      .then(res => {
-        setInterestsInfo(res.data);
-      })
-      .catch(reason => {
-        console.log(reason);
-      });
-  }, []);
+    const appendInterestsList = (x: number) => {
+        selectedInterests.push(x);
+        // selectedInterests.forEach(function (number) {
+        //     console.log(number);
+        // });
+    }
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.topArea}>
-        <View style={styles.titleTxtArea}>
-          <Text style={styles.titleTxt}>
-            {'관심있는 분야 태그를\n선택하세요'}
-          </Text>
+    //선택할 수 있는 interest tag list를 가져옴
+    useEffect(() => {
+        userService
+            .getInterestList()
+            .then(res => {
+                setInterestsInfo(res.data);
+            })
+            .catch(reason => {
+                console.log(reason);
+            });
+    }, []); //최초 1회만 실행되는 경우 []
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.topArea}>
+                <View style={styles.titleTxtArea}>
+                    <Text style={styles.titleTxt}>
+                        {'관심있는 분야 태그를\n선택하세요'}
+                    </Text>
+                </View>
+            </View>
+            <View style={styles.midArea}>
+                <ScrollView
+                    style={{
+                        flex: 2,
+                        // backgroundColor: 'blue',
+                    }}>
+                    <View style={customStyles.scrollView}>
+                        {interestsInfo.map(info => (
+                            <InterestButton name={info.name} id={info.inId} appendInterestsList={appendInterestsList}/>
+                        ))}
+                    </View>
+                </ScrollView>
+            </View>
+            <View style={styles.btmArea}>
+                <View style={styles.btnArea}>
+                    <TouchableOpacity
+                        style={styles.btn}
+                        onPress={() => navigation.navigate('Positions')}>
+                        <Text style={styles.btnTxt}>{'다음으로'}</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.btnArea}/>
+            </View>
         </View>
-      </View>
-      <View style={styles.midArea}>
-        <ScrollView
-          style={{
-            flex: 2,
-            // backgroundColor: 'blue',
-          }}>
-          <View style={customStyles.scrollView}>
-            {interestsInfo.map(info => (
-              <InterestButton name={info.name} key={info.id} />
-            ))}
-          </View>
-        </ScrollView>
-      </View>
-      <View style={styles.btmArea}>
-        <View style={styles.btnArea}>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigation.navigate('Positions')}>
-            <Text style={styles.btnTxt}>{'다음으로'}</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.btnArea} />
-      </View>
-    </View>
-  );
+    );
 }
 
 const customStyles = StyleSheet.create({
-  scrollView: {
-    flexDirection: 'row', //가로배치
-    flexWrap: 'wrap', //컨테이너 끝에 닿으면 줄바꿈
-  },
-  selectBtnArea: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-    borderRadius: 8,
-    margin: 7,
-  },
-  selectTxt: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: 'black',
-  },
+    scrollView: {
+        flexDirection: 'row', //가로배치
+        flexWrap: 'wrap', //컨테이너 끝에 닿으면 줄바꿈
+    },
+    selectBtnArea: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f0f0f0',
+        padding: 10,
+        borderRadius: 8,
+        margin: 7,
+    },
+    selectTxt: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: 'black',
+    },
 });
 
 // const interestsInfo: interests[] = [
