@@ -19,18 +19,20 @@ export type PositionsScreenProps = StackScreenProps<UserStackParamList,
 type Props = {
     name: string;
     id: number;
-    appendPositionsList: (x: number) => void;
+    appendPositionsList: (x: number, check: boolean) => void;
 }
 
 
 const Item = ({name, id, appendPositionsList}: Props) => {
     const [isSelected, setIsSelected] = useState<boolean>(false);
+
+
     return (
         <Pressable
             style={customStyles.selectBoxArea}
             onPress={() => {
                 setIsSelected(!isSelected);
-                appendPositionsList(id.posId);
+                appendPositionsList(id.posId, isSelected);
             }}>
             <View style={{flex: 8}}>
                 <Text style={customStyles.selectTxt}>{name}</Text>
@@ -51,11 +53,18 @@ export default function PositionsScreen({navigation}: PositionsScreenProps) {
 
     let selectedPositions: number[] = [];
 
-    const appendPositionsList = (x: number) => {
-        selectedPositions.push(x);
-        // selectedPositions.forEach(function (number) {
-        //     console.log(number);
-        // });
+    const appendPositionsList = (x: number, check: boolean) => {
+
+        if (!check) {
+            selectedPositions.push(x);
+        } else {
+            selectedPositions = selectedPositions.filter((el: number) => el !== x);
+        }
+
+        console.log("======================");
+        selectedPositions.forEach(function (number) {
+            console.log(number);
+        });
     }
 
 
