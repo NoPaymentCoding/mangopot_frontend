@@ -113,77 +113,77 @@ const customStyles = StyleSheet.create({
   },
 });
 
-const positionsInfo: positions[] = [
-  {
-    id: 0,
-    name: '백엔드 개발자',
-  },
-  {
-    id: 1,
-    name: '프론트엔드 개발자',
-  },
-  {
-    id: 2,
-    name: '디자이너',
-  },
-  {
-    id: 3,
-    name: 'reactNative',
-  },
-  {
-    id: 4,
-    name: 'docker',
-  },
-  {
-    id: 5,
-    name: 'Kotlin',
-  },
-  {
-    id: 6,
-    name: 'node.js',
-  },
-  {
-    id: 7,
-    name: 'vue.js',
-  },
-  {
-    id: 8,
-    name: 'Angular',
-  },
-  {
-    id: 9,
-    name: 'flask',
-  },
-  {
-    id: 10,
-    name: 'Django',
-  },
-  {
-    id: 11,
-    name: 'mongoDB',
-  },
-  {
-    id: 12,
-    name: 'postgreSQL',
-  },
-  {
-    id: 13,
-    name: 'swift',
-  },
-  {
-    id: 14,
-    name: 'java',
-  },
-  {
-    id: 15,
-    name: 'javascript',
-  },
-  {
-    id: 16,
-    name: 'typescript',
-  },
-  {
-    id: 17,
-    name: 'ruby',
-  },
-];
+// const positionsInfo: positions[] = [
+//   {
+//     id: 0,
+//     name: '백엔드 개발자',
+//   },
+//   {
+//     id: 1,
+//     name: '프론트엔드 개발자',
+//   },
+//   {
+//     id: 2,
+//     name: '디자이너',
+//   },
+//   {
+//     id: 3,
+//     name: 'reactNative',
+//   },
+//   {
+//     id: 4,
+//     name: 'docker',
+//   },
+//   {
+//     id: 5,
+//     name: 'Kotlin',
+//   },
+//   {
+//     id: 6,
+//     name: 'node.js',
+//   },
+//   {
+//     id: 7,
+//     name: 'vue.js',
+//   },
+//   {
+//     id: 8,
+//     name: 'Angular',
+//   },
+//   {
+//     id: 9,
+//     name: 'flask',
+//   },
+//   {
+//     id: 10,
+//     name: 'Django',
+//   },
+//   {
+//     id: 11,
+//     name: 'mongoDB',
+//   },
+//   {
+//     id: 12,
+//     name: 'postgreSQL',
+//   },
+//   {
+//     id: 13,
+//     name: 'swift',
+//   },
+//   {
+//     id: 14,
+//     name: 'java',
+//   },
+//   {
+//     id: 15,
+//     name: 'javascript',
+//   },
+//   {
+//     id: 16,
+//     name: 'typescript',
+//   },
+//   {
+//     id: 17,
+//     name: 'ruby',
+//   },
+// ];
