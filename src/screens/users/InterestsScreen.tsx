@@ -91,8 +91,8 @@ export default function InterestsScreen({navigation}: InterestsScreenProps) {
             // backgroundColor: 'blue',
           }}>
           <View style={customStyles.scrollView}>
-            {interestsInfo.map((info, idx) => (
-              <InterestButton name={info.name} key={idx} />
+            {interestsInfo.map(info => (
+              <InterestButton name={info.name} key={info.id} />
             ))}
           </View>
         </ScrollView>
