@@ -52,7 +52,8 @@ const InterestButton = ({name}: string) => {
 };
 
 export default function InterestsScreen({navigation}: InterestsScreenProps) {
-  // const [interestsInfo, setInterestsInfo] = useState<interests[]>([]);
+  const [interestsInfo, setInterestsInfo] = useState<interests[]>([]);
+  // const [selectedInterests, setSelectedInterests] = useState<number[]>();
 
   // const getInterestList = async () => {
   //   try {
@@ -63,11 +64,16 @@ export default function InterestsScreen({navigation}: InterestsScreenProps) {
   //   }
   // };
 
-  // useEffect(() => {
-  //   userService.getInterestList().then(res => {
-  //     setInterestsInfo(res.data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    userService
+      .getInterestList()
+      .then(res => {
+        setInterestsInfo(res.data);
+      })
+      .catch(reason => {
+        console.log(reason);
+      });
+  }, []);
 
   return (
     <View style={styles.container}>
