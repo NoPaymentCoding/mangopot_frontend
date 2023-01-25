@@ -52,13 +52,18 @@ const Item = ({name}: string) => {
 };
 
 export default function PositionsScreen({navigation}: PositionsScreenProps) {
-  // const [positionsInfo, setPositionsInfo] = useState<positions[]>([]);
-  //
-  // useEffect(() => {
-  //   userService.getPositionList().then(res => {
-  //     setPositionsInfo(res.data);
-  //   });
-  // }, []);
+  const [positionsInfo, setPositionsInfo] = useState<positions[]>([]);
+
+  useEffect(() => {
+    userService
+      .getPositionList()
+      .then(res => {
+        setPositionsInfo(res.data);
+      })
+      .catch(reason => {
+        console.log(reason);
+      });
+  }, []);
 
   return (
     <View style={styles.container}>
