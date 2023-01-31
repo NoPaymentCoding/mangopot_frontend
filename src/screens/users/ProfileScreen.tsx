@@ -1,5 +1,5 @@
 //react libraries import
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View,} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
@@ -11,6 +11,7 @@ import {UserStackParamList} from '../../types/stacks/StackTypes';
 
 //stack 관련 import
 import {StackScreenProps} from '@react-navigation/stack';
+import {launchImageLibrary} from "react-native-image-picker";
 
 Icon.loadFont().then();
 
@@ -18,6 +19,18 @@ export type ProfileScreenProps = StackScreenProps<UserStackParamList,
     'Profile'>;
 
 export default function ProfileScreen({navigation}: ProfileScreenProps) {
+
+    const [profileImg, setProfileImg] = useState<string>('../../assets/images/ggamja.jpeg');
+
+    const pickImage = () => {
+        launchImageLibrary({mediaType: 'photo'}).then(res => {
+            if (res.didCancel != false) {
+                setProfileImg(res.assets[0].uri);
+            }
+        })
+    }
+
+
     return (
         <View style={styles.container}>
             <View style={styles.topArea}>
@@ -30,9 +43,11 @@ export default function ProfileScreen({navigation}: ProfileScreenProps) {
                     <View style={customStyles.profileImgArea}>
                         <Image
                             style={customStyles.profileImg}
-                            source={require('../../assets/images/ggamja.jpeg')}
+                            source={{uri: profileImg}}
                         />
-                        <TouchableOpacity style={customStyles.editImg}>
+                        <TouchableOpacity style={customStyles.editImg}
+                                          onPress={pickImage}
+                        >
                             <Icon name="camera" size={25}/>
                         </TouchableOpacity>
                     </View>
