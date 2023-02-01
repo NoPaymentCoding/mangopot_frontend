@@ -20,7 +20,8 @@ export type ProfileScreenProps = StackScreenProps<UserStackParamList,
 
 export default function ProfileScreen({navigation}: ProfileScreenProps) {
 
-    const [profileImg, setProfileImg] = useState<string>('../../assets/images/ggamja.jpeg');
+    const [profileImg, setProfileImg] = useState<string>('../../assets/images/ggamja.jpeg'); // 기본이미지 백엔드에서 끌어오기
+    const [userInfo, setUserInfo] = useState<string>(''); //자기소개
 
     const pickImage = () => {
         launchImageLibrary({mediaType: 'photo'}).then(res => {
@@ -30,6 +31,21 @@ export default function ProfileScreen({navigation}: ProfileScreenProps) {
         })
     }
 
+
+    //id 가져와야 가능 -> 원본 프로필 이미지 가져오기
+    // useEffect(() => {
+    //     userService
+    //         .getProfileImg(id)
+    //         .then(res => {
+    //             setProfileImg(res.data);
+    //         })
+    //         .catch(reason => {
+    //             console.log(reason);
+    //         });
+    // }, []); //최초 1회만 실행되는 경우 []
+
+
+    //시작하기 버튼을 눌렀을 경우 -> update 후 메인화면으로 이동
 
     return (
         <View style={styles.container}>
@@ -62,6 +78,7 @@ export default function ProfileScreen({navigation}: ProfileScreenProps) {
                             editable
                             multiline
                             numberOfLines={4}
+                            onChangeText={userInfo => setUserInfo(userInfo)}
                             placeholder={'자유롭게 자신을 소개해보세요!'}
                         />
                     </View>
