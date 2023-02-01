@@ -19,21 +19,30 @@ export type PositionsScreenProps = StackScreenProps<UserStackParamList,
 type Props = {
     name: string;
     id: number;
-    appendPositionsList: (x: number, check: boolean) => void;
+    appendPositionsList: (x: number, check: boolean) => boolean;
 }
 
 
 const Item = ({name, id, appendPositionsList}: Props) => {
     const [isSelected, setIsSelected] = useState<boolean>(false);
 
+    const onChange = () => {
+
+        setIsSelected(!isSelected);
+
+        //5개 이상 켜졌는지 여부를 리턴함
+        var res: boolean = appendPositionsList(id, isSelected);
+
+        if (!res) {//3개 이상 켜졌으면 버튼이 눌리지 않게 하기
+            setIsSelected(false);
+        }
+
+    }
 
     return (
         <Pressable
             style={customStyles.selectBoxArea}
-            onPress={() => {
-                setIsSelected(!isSelected);
-                appendPositionsList(id.posId, isSelected);
-            }}>
+            onPress={onChange}>
             <View style={{flex: 8}}>
                 <Text style={customStyles.selectTxt}>{name}</Text>
             </View>
@@ -53,7 +62,7 @@ export default function PositionsScreen({navigation}: PositionsScreenProps) {
 
     let selectedPositions: number[] = [];
 
-    const appendPositionsList = (x: number, check: boolean) => {
+    const appendPositionsList = (x: number, check: boolean): boolean => {
 
         if (!check) {
             selectedPositions.push(x);
@@ -61,10 +70,16 @@ export default function PositionsScreen({navigation}: PositionsScreenProps) {
             selectedPositions = selectedPositions.filter((el: number) => el !== x);
         }
 
-        console.log("======================");
-        selectedPositions.forEach(function (number) {
-            console.log(number);
-        });
+
+        //선택항목이 5개 초과이면 알리기
+        if (selectedPositions.length > 2) {
+            alert("관심 직무는 2개까지 선택 가능합니다."); //경고문구 출력
+            selectedPositions = selectedPositions.filter((el: number) => el !== x); //있으면 삭제
+            return false; //초과여부를 알림
+        }
+
+        return true;//초과 여부를 알림
+
     }
 
 
