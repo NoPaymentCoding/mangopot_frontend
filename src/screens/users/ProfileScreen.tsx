@@ -51,7 +51,7 @@ export default function ProfileScreen({navigation}: ProfileScreenProps) {
         <View style={styles.container}>
             <View style={styles.topArea}>
                 <View style={styles.titleTxtArea}>
-                    <Text style={styles.titleTxt}>{'프로필을 꾸며보세요'}</Text>
+                    <Text style={styles.titleTxt1}>{'프로필을 꾸며보세요'}</Text>
                 </View>
             </View>
             <View style={styles.midArea}>

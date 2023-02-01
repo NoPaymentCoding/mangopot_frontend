@@ -100,7 +100,7 @@ export default function InterestsScreen({navigation}: InterestsScreenProps) {
         <View style={styles.container}>
             <View style={styles.topArea}>
                 <View style={styles.titleTxtArea}>
-                    <Text style={styles.titleTxt}>
+                    <Text style={styles.titleTxt2}>
                         {'관심있는 분야 태그를\n선택하세요'}
                     </Text>
                 </View>

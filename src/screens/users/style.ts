@@ -9,9 +9,10 @@ const styles = StyleSheet.create({
   topArea: {
     flex: 1,
     // backgroundColor: 'red',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     paddingLeft: 20,
     paddingRight: 20,
+    // paddingBottom: 15, -> 2줄인거 15, 한줄인거 10..?
     // alignItems: 'center',
   },
   midArea: {
@@ -40,9 +41,15 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     // backgroundColor: 'white',
   },
-  titleTxt: {
+  titleTxt2: {//2줄짜리 제목
     fontSize: 25,
     fontWeight: 'bold',
+    paddingBottom: 15,
+  },
+  titleTxt1: { //1줄짜리 제목
+    fontSize: 25,
+    fontWeight: 'bold',
+    paddingBottom: 20,
   },
   //"다음으로" 버튼 관련 style
   btn: {

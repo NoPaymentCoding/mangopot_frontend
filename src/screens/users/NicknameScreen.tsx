@@ -1,12 +1,6 @@
 //react libraries import
-import React, {useCallback, useEffect, useState} from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-    TextInput,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, TextInput, TouchableOpacity, View,} from 'react-native';
 
 //design 관련
 import styles from './style';
@@ -67,7 +61,7 @@ export default function NicknameScreen({navigation}: NicknameScreenProps) {
         <View style={styles.container}>
             <View style={styles.topArea}>
                 <View style={styles.titleTxtArea}>
-                    <Text style={styles.titleTxt}>{'회원가입'}</Text>
+                    <Text style={styles.titleTxt1}>{'회원가입'}</Text>
                 </View>
             </View>
             <View style={styles.midArea}>

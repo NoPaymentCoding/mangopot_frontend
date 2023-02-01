@@ -98,7 +98,7 @@ export default function PositionsScreen({navigation}: PositionsScreenProps) {
         <View style={styles.container}>
             <View style={styles.topArea}>
                 <View style={styles.titleTxtArea}>
-                    <Text style={styles.titleTxt}>
+                    <Text style={styles.titleTxt2}>
                         {'관심있는 포지션을\n선택해주세요'}
                     </Text>
                 </View>
