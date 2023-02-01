@@ -20,11 +20,26 @@ export type InterestsScreenProps = StackScreenProps<UserStackParamList,
 type Props = {
     name: string;
     id: number;
-    appendInterestsList: (x: number, check: boolean) => void;
+    appendInterestsList: (x: number, check: boolean) => boolean;
 }
 
 const InterestButton = ({name, id, appendInterestsList}: Props) => {
-    const [isSelected, setIsSlected] = useState<boolean>(false);
+    const [isSelected, setIsSelected] = useState<boolean>(false);
+
+
+    const onChange = () => {
+
+        setIsSelected(!isSelected);
+
+        //5개 이상 켜졌는지 여부를 리턴함
+        var res: boolean = appendInterestsList(id, isSelected);
+
+        if (!res) {//5개 이상 켜졌으면 버튼이 눌리지 않게 하기
+            setIsSelected(false);
+        }
+
+    }
+
 
     return (
         <View>
@@ -33,10 +48,7 @@ const InterestButton = ({name, id, appendInterestsList}: Props) => {
                     customStyles.selectBtnArea,
                     {backgroundColor: isSelected ? '#fc913a' : '#f0f0f0'},
                 ]}
-                onPress={() => {
-                    setIsSlected(!isSelected);
-                    appendInterestsList(id, isSelected);
-                }}>
+                onPress={onChange}>
                 <Text
                     style={[
                         customStyles.selectTxt,
@@ -53,19 +65,24 @@ export default function InterestsScreen({navigation}: InterestsScreenProps) {
     const [interestsInfo, setInterestsInfo] = useState<interests[]>([]);
     let selectedInterests: number[] = [];
 
-    const appendInterestsList = (x: number, check: boolean) => {
+    const appendInterestsList = (x: number, check: boolean): boolean => { //boolean형을 return하는 함수
+
         if (!check) {
-            selectedInterests.push(x);
+            selectedInterests.push(x)
         } else {
             selectedInterests = selectedInterests.filter((el: number) => el !== x); //있으면 삭제
         }
 
-        console.log("======================");
-        selectedInterests.forEach(function (number) {
-            console.log(number);
-        });
+        //선택항목이 5개 초과이면 알리기
+        if (selectedInterests.length > 5) {
+            alert("태그는 5개까지 선택 가능합니다."); //경고문구 출력
+            selectedInterests = selectedInterests.filter((el: number) => el !== x); //있으면 삭제
+            return false; //초과여부를 알림
+        }
 
+        return true;//초과 여부를 알림
     }
+
 
     //선택할 수 있는 interest tag list를 가져옴
     useEffect(() => {
@@ -96,7 +113,8 @@ export default function InterestsScreen({navigation}: InterestsScreenProps) {
                     }}>
                     <View style={customStyles.scrollView}>
                         {interestsInfo.map(info => (
-                            <InterestButton name={info.name} id={info.inId} appendInterestsList={appendInterestsList}/>
+                            <InterestButton name={info.name} id={info.inId} selectedInterests={selectedInterests}
+                                            appendInterestsList={appendInterestsList}/>
                         ))}
                     </View>
                 </ScrollView>
