@@ -17,27 +17,27 @@ import {UserStackParamList} from './src/types/stacks/StackTypes';
 const UserStack = createNativeStackNavigator<UserStackParamList>();
 
 const App = () => {
-  return (
-    <NavigationContainer>
-      {/*  stack navigator로 동작 */}
-      <UserStack.Navigator initialRouteName="Splash">
-        {/*  stack navigator로 동작하는 화면이 추가 될 태그 */}
-        <UserStack.Screen
-          name="Splash"
-          component={SplashScreen}
-          options={{headerShown: false}}
-        />
-        <UserStack.Screen
-          name="Nickname"
-          component={NicknameScreen}
-          options={{headerShown: false}}
-        />
-        <UserStack.Screen name="Interests" component={InterestsScreen} />
-        <UserStack.Screen name="Positions" component={PositionsScreen} />
-        <UserStack.Screen name="Profile" component={ProfileScreen} />
-      </UserStack.Navigator>
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            {/*  stack navigator로 동작 */}
+            <UserStack.Navigator initialRouteName="Splash">
+                {/*  stack navigator로 동작하는 화면이 추가 될 태그 */}
+                <UserStack.Screen
+                    name="Splash"
+                    component={SplashScreen}
+                    options={{headerShown: false}}
+                />
+                <UserStack.Screen
+                    name="Nickname"
+                    component={NicknameScreen}
+                    options={{headerShown: false}}
+                />
+                <UserStack.Screen name="Interests" component={InterestsScreen} options={{headerShown: false}}/>
+                <UserStack.Screen name="Positions" component={PositionsScreen} options={{headerShown: false}}/>
+                <UserStack.Screen name="Profile" component={ProfileScreen} options={{headerShown: false}}/>
+            </UserStack.Navigator>
+        </NavigationContainer>
+    );
 };
 
 export default App;
