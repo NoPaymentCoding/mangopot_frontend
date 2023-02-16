@@ -132,7 +132,7 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
           <Text style={styles.titleText}>글쓰기</Text>
         </View>
         <View style={styles.headerBtnGroup}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <View style={styles.cancelBtn}>
               <Text style={styles.cancelText}>취소</Text>
             </View>
