@@ -121,6 +121,10 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
     }
   };
 
+  //인원설정
+  const [front, setFront] = useState('0');
+  const [back, setBack] = useState('0');
+
   return (
     <View style={{flex: 1}}>
       <View style={styles.header}>
@@ -231,7 +235,31 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
           ))}
         </View>
       </View>
-      <View style={styles.position}></View>
+      <View style={styles.position}>
+        <Text style={[{color: 'black'}, {paddingLeft: 10}, {paddingTop: 10}]}>
+          인원 설정
+        </Text>
+        <View style={[{flexDirection: 'row'}, {marginBottom: -15}]}>
+          <Text style={[{color: 'black'}, {paddingLeft: 10}, {paddingTop: 14}]}>
+            프론트엔드
+          </Text>
+          <TextInput
+            value={front}
+            onChangeText={event => setFront(event)}
+            style={{paddingLeft: 14}}
+            placeholder="숫자"></TextInput>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={[{color: 'black'}, {paddingLeft: 10}, {paddingTop: 14}]}>
+            백엔드
+          </Text>
+          <TextInput
+            onChangeText={event => setBack(event)}
+            value={back}
+            style={{paddingLeft: 14}}
+            placeholder="숫자"></TextInput>
+        </View>
+      </View>
     </View>
   );
 };
@@ -244,7 +272,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderBottomWidth: 0.3,
+    borderBottomWidth: 2,
     borderBottomColor: '#E6E6E6',
   },
 
@@ -302,7 +330,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
-    borderBottomWidth: 0.3,
+    borderBottomWidth: 2,
     borderBottomColor: '#E6E6E6',
   },
 
@@ -348,14 +376,19 @@ const styles = StyleSheet.create({
   },
 
   content: {
-    flex: 2.5,
-    backgroundColor: 'white',
-  },
-  tag: {
     flex: 2,
     backgroundColor: 'white',
+    borderBottomWidth: 2,
+    borderBottomColor: '#E6E6E6',
+  },
+  tag: {
+    flex: 1.5,
+    backgroundColor: 'white',
+    borderBottomColor: '#E6E6E6',
+    borderBottomWidth: 2,
   },
   tagText: {
+    paddingTop: 10,
     marginLeft: 10,
     fontWeight: 'bold',
     color: 'black',
@@ -363,7 +396,8 @@ const styles = StyleSheet.create({
   },
 
   fieldContainer: {
-    padding: 12,
+    paddingLeft: 12,
+    paddingTop: 10,
     backgroundColor: 'white',
   },
 
@@ -390,8 +424,8 @@ const styles = StyleSheet.create({
   },
 
   position: {
-    flex: 2,
-    backgroundColor: 'violet',
+    flex: 1.5,
+    backgroundColor: 'white',
   },
 });
 
