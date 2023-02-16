@@ -23,6 +23,7 @@ const App = () => {
           <projectStack.Screen
             name="Posting"
             component={ProjectPostingScreen}
+            options={{headerShown: false}}
           />
         </projectStack.Group>
       </projectStack.Navigator>

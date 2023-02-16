@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-//import MultiSelect from 'react-native-multiple-select';
+import MultiSelect from 'react-native-multiple-select';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {StackScreenProps} from '@react-navigation/stack';
 
@@ -102,9 +103,23 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
     onChangeText(date.format('yyyy/MM/dd'));
   };
 
-  //분야 태그
-  const fieldsTagsCollection = fieldTags;
-  const [selectedField, setSelectedField] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  const onSelectedItemsChange = selectedItems => {
+    if (selectedItems.length > 5) {
+      Alert.alert('태그는 5개까지만 설정할 수 있습니다.');
+      selectedItems.pop();
+    } else {
+      setSelectedItems(selectedItems);
+
+      for (let i = 0; i < selectedItems.length; i++) {
+        var tempItem = fieldTags.find(
+          item => item.fieldId === selectedItems[i],
+        );
+        console.log(tempItem);
+      }
+    }
+  };
 
   return (
     <View style={{flex: 1}}>
@@ -183,7 +198,38 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
         />
       </View>
       <View style={styles.tag}>
-        <Text>태그 (최대 5개)</Text>
+        <Text style={styles.tagText}>태그 (최대 5개)</Text>
+        <View style={styles.fieldContainer}>
+          <MultiSelect
+            hideTags
+            items={fieldTags}
+            uniqueKey="fieldId"
+            onSelectedItemsChange={onSelectedItemsChange}
+            selectedItems={selectedItems}
+            selectText="분야 태그"
+            searchInputPlaceholderText="태그를 검색해주세요"
+            onChangeInput={tagtext => console.log(tagtext)}
+            tagRemoveIconColor="#CCC"
+            tagBorderColor="#CCC"
+            tagTextColor="#CCC"
+            selectedItemTextColor="#CCC"
+            selectedItemIconColor="#CCC"
+            itemTextColor="#000"
+            displayKey="fieldName"
+            searchInputStyle={{color: '#CCC'}}
+            hideSubmitButton={true}
+            fixedHeight={true}
+          />
+        </View>
+        <View style={styles.selectedTag}>
+          {selectedItems.map(fieldId => (
+            <View>
+              <View style={styles.selectedTagArea}>
+                <Text>{fieldTags[fieldId].fieldName}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
       </View>
       <View style={styles.position}></View>
     </View>
@@ -303,34 +349,49 @@ const styles = StyleSheet.create({
 
   content: {
     flex: 2.5,
-    //backgroundColor: 'yellow',
+    backgroundColor: 'white',
   },
   tag: {
-    flex: 0.8,
-    backgroundColor: 'blue',
-  },
-  position: {
     flex: 2,
-    backgroundColor: 'violet',
+    backgroundColor: 'white',
   },
-});
+  tagText: {
+    marginLeft: 10,
+    fontWeight: 'bold',
+    color: 'black',
+    fontSize: 14,
+  },
 
-const fieldBtnStyles = StyleSheet.create({
-  scrollView: {
+  fieldContainer: {
+    padding: 12,
+    backgroundColor: 'white',
+  },
+
+  fieldtext: {
+    padding: 12,
+    fontSize: 22,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: 'black',
+  },
+
+  selectedTag: {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  btnContainer: {
+
+  selectedTagArea: {
+    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-    borderRadius: 8,
-    margin: 7,
+    backgroundColor: '#fc913a',
+    padding: 4,
+    borderRadius: 5,
+    marginLeft: 10,
   },
-  btnText: {
-    fontWeight: 'bold',
-    color: 'black',
+
+  position: {
+    flex: 2,
+    backgroundColor: 'violet',
   },
 });
 
