@@ -24,6 +24,8 @@ export type ProjectPostingScreenProps = StackScreenProps<
   'Posting'
 >;
 
+import projectService from '../../services/projectService';
+
 //날짜 포맷팅 함수
 Date.prototype.format = function (f) {
   if (!this.valueOf()) return ' ';
@@ -84,6 +86,11 @@ Number.prototype.zf = function (len) {
 
 const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
   const [locPickerValue, setLocPickerValue] = useState('서울'); //지역 컨트롤
+  const [title, setTitle] = useState(''); //글제목
+  const [content, setContent] = useState(''); //글내용
+  //인원설정
+  const [front, setFront] = useState('0');
+  const [back, setBack] = useState('0');
 
   //마감일 컨트롤
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -121,9 +128,10 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
     }
   };
 
-  //인원설정
-  const [front, setFront] = useState('0');
-  const [back, setBack] = useState('0');
+  //posting 버튼 클릭 시
+  const onCompleteBtnPressed = () => {
+    projectService.Posting(locPickerValue, title, content, front, back, text);
+  };
 
   return (
     <View style={{flex: 1}}>
@@ -137,7 +145,7 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
               <Text style={styles.cancelText}>취소</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity onPress={onCompleteBtnPressed}>
             <View style={styles.completeBtn}>
               <Text style={styles.completeText}>완료</Text>
             </View>
@@ -192,10 +200,14 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
       </View>
       <View style={styles.content}>
         <TextInput
+          value={title}
+          onChangeText={event => setTitle(event)}
           style={styles.contentNameInput}
           placeholder="제목을 입력하세요(*필수)"
         />
         <TextInput
+          value={content}
+          onChangeText={event => setContent(event)}
           style={styles.contentNameText}
           placeholder="내용을 입력하세요."
           multiline={true}
