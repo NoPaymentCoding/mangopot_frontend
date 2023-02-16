@@ -129,7 +129,7 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
   };
 
   //posting 버튼 클릭 시
-  const onCompleteBtnPressed = () => {
+  const onCompleteBtnPressed = async () => {
     console.log(selectedItems);
 
     let selectItemsNames: string[] = [];
@@ -138,7 +138,7 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
     }
 
     console.log(selectItemsNames);
-    projectService.Posting(
+    const response = await projectService.Posting(
       locPickerValue,
       title,
       content,
@@ -147,6 +147,16 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
       text,
       selectItemsNames,
     );
+
+    if (response === 200) {
+      Alert.alert('안내', '정상적으로 등록되었습니다.');
+      navigation.navigate('Home');
+    } else {
+      Alert.alert(
+        '안내',
+        '게시글이 오류로 인해 등록되지 못했습니다. 잠시 후 다시 시도해주세요.',
+      );
+    }
   };
 
   return (
