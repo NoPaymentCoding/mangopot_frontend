@@ -1,4 +1,4 @@
-import React, {useState, Component} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -130,7 +130,23 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
 
   //posting 버튼 클릭 시
   const onCompleteBtnPressed = () => {
-    projectService.Posting(locPickerValue, title, content, front, back, text);
+    console.log(selectedItems);
+
+    let selectItemsNames: string[] = [];
+    for (var i = 0; i < selectedItems.length; i++) {
+      selectItemsNames.push(fieldTags[i].fieldName);
+    }
+
+    console.log(selectItemsNames);
+    projectService.Posting(
+      locPickerValue,
+      title,
+      content,
+      front,
+      back,
+      text,
+      selectItemsNames,
+    );
   };
 
   return (

@@ -11,13 +11,14 @@ class projectServices {
     paramFront: string,
     paramBack: string,
     paramDeadline: string,
+    paramInterest: string[],
   ) {
     const locName = paramLoc;
     const userNickName = '이하연';
     const deadline = paramDeadline.replace(/\//g, '-');
     const title = paramTitle;
     const context = paramContent;
-    const interest = ['spring', 'mySQL'];
+    const interest = paramInterest;
     const position = [
       {name: '백엔드 개발자', value: Number(paramBack)},
       {name: '프론트엔드 개발자', value: Number(paramFront)},
