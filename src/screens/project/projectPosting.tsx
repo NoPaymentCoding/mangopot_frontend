@@ -7,11 +7,15 @@ import {
   TextInput,
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
+//import MultiSelect from 'react-native-multiple-select';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {StackScreenProps} from '@react-navigation/stack';
 
 //Project Stack
 import {ProjectStackParamList} from '../../types/stacks/ProjectStackTypes';
+
+//field type
+import fields from '../../types/project/ProjectPostingTypes';
 
 //export type
 export type ProjectPostingScreenProps = StackScreenProps<
@@ -19,6 +23,7 @@ export type ProjectPostingScreenProps = StackScreenProps<
   'Posting'
 >;
 
+//날짜 포맷팅 함수
 Date.prototype.format = function (f) {
   if (!this.valueOf()) return ' ';
 
@@ -79,6 +84,7 @@ Number.prototype.zf = function (len) {
 const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
   const [locPickerValue, setLocPickerValue] = useState('서울'); //지역 컨트롤
 
+  //마감일 컨트롤
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [text, onChangeText] = useState('');
 
@@ -95,6 +101,10 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
     hideDatePicker();
     onChangeText(date.format('yyyy/MM/dd'));
   };
+
+  //분야 태그
+  const fieldsTagsCollection = fieldTags;
+  const [selectedField, setSelectedField] = useState([]);
 
   return (
     <View style={{flex: 1}}>
@@ -172,11 +182,15 @@ const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
           multiline={true}
         />
       </View>
-      <View style={styles.tag}></View>
+      <View style={styles.tag}>
+        <Text>태그 (최대 5개)</Text>
+      </View>
       <View style={styles.position}></View>
     </View>
   );
 };
+
+export default ProjectPosting;
 
 const styles = StyleSheet.create({
   header: {
@@ -283,6 +297,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlignVertical: 'center',
     paddingLeft: 10,
+    backgroundColor: 'white',
+    marginLeft: 4,
   },
 
   content: {
@@ -299,4 +315,69 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProjectPosting;
+const fieldBtnStyles = StyleSheet.create({
+  scrollView: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  btnContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+    borderRadius: 8,
+    margin: 7,
+  },
+  btnText: {
+    fontWeight: 'bold',
+    color: 'black',
+  },
+});
+
+//임시 데이터
+const fieldTags: fields[] = [
+  {
+    fieldId: 0,
+    fieldName: 'react',
+  },
+  {
+    fieldId: 1,
+    fieldName: 'react-native',
+  },
+  {
+    fieldId: 2,
+    fieldName: 'spring',
+  },
+  {
+    fieldId: 3,
+    fieldName: 'DJango',
+  },
+  {
+    fieldId: 4,
+    fieldName: 'MariaDB',
+  },
+  {
+    fieldId: 5,
+    fieldName: 'Oracle',
+  },
+  {
+    fieldId: 6,
+    fieldName: 'Vue.js',
+  },
+  {
+    fieldId: 7,
+    fieldName: 'typescript',
+  },
+  {
+    fieldId: 8,
+    fieldName: 'java',
+  },
+  {
+    fieldId: 9,
+    fieldName: 'MatLab',
+  },
+  {
+    fieldId: 10,
+    fieldName: 'SystemOS',
+  },
+];
