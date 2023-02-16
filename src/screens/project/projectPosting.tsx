@@ -8,6 +8,16 @@ import {
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {StackScreenProps} from '@react-navigation/stack';
+
+//Project Stack
+import {ProjectStackParamList} from '../../types/stacks/ProjectStackTypes';
+
+//export type
+export type ProjectPostingScreenProps = StackScreenProps<
+  ProjectStackParamList,
+  'Posting'
+>;
 
 Date.prototype.format = function (f) {
   if (!this.valueOf()) return ' ';
@@ -66,7 +76,7 @@ Number.prototype.zf = function (len) {
   return this.toString().zf(len);
 };
 
-const Posting = () => {
+const ProjectPosting = ({navigation}: ProjectPostingScreenProps) => {
   const [locPickerValue, setLocPickerValue] = useState('서울'); //지역 컨트롤
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -98,7 +108,7 @@ const Posting = () => {
               <Text style={styles.cancelText}>취소</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <View style={styles.completeBtn}>
               <Text style={styles.completeText}>완료</Text>
             </View>
@@ -289,4 +299,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Posting;
+export default ProjectPosting;
